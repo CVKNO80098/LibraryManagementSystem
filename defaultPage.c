@@ -11,14 +11,16 @@ void AdminPageMain(UserInfo user , HANDLE hOut) {
 	printf("│              您好 %s             │\n", user.username);
 	printf("├─────────────────────────────────────┤\n");
 	printf("│        1、查看总图书情况            │\n");
-	printf("│        2、查看册图书情况            │\n");
-	printf("│        3、查找指定图书情况          |\n");
-	printf("│        4、添加一种书籍              │\n");
-	printf("│        5、入库书籍                  |\n");
-	printf("|        6、注册新的账户              │\n");
-	printf("|        7、查看所有账户              │\n");
-	printf("|        8、删除指定账户              │\n");
-	printf("│        9、退出                      │\n");
+	printf("│        2、id查看册图书情况          │\n");
+	printf("│        3、书名查找册图书情况        |\n");
+	printf("│        4、id查找指定图书情况        |\n");
+	printf("│        5、添加一种书籍              │\n");
+	printf("│        6、删除一种书籍              │\n");
+	printf("│        7、入库书籍                  |\n");
+	printf("|        8、注册新的账户              │\n");
+	printf("|        9、查看所有账户              │\n");
+	printf("|        10、删除指定账户             │\n");
+	printf("│        11、退出                     │\n");
 	printf("└─────────────────────────────────────┘\n");
 }
 

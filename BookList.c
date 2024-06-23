@@ -128,30 +128,71 @@ int DelBook(Chain* head, int book_id) {
 void displayBooksInfo(Chain* head, int book_id) {
 	Chain* current = head->next; // 跳过头节点
 
+	printf("├────────┬────────────────────┬────────────┬─────────────┬────────────┬────────┬─────────┬─────────┤\n");
+	printf("│  ID    │ 图书名称           │ 作者       │ 出版社      │ 总册数     │ 剩余数 │ 书本序号│ 借阅状态│\n");
+	printf("├────────┼────────────────────┼────────────┼─────────────┼────────────┼────────┼─────────┼─────────┤\n");
+
+
 	while (current != NULL) {
 		if (current->data.book_id == book_id) {
 			// 打印 Books 信息
-			printf("书籍ID:\t%d\n", current->data.book_id);
-			printf("名称:\t%s\n", current->data.name);
-			printf("作者:\t%s (ID:\t%d)\n", current->data.anthor, current->data.anthor_id);
-			printf("出版社:\t%s (ID:\t%d)\n", current->data.press, current->data.press_id);
-			printf("总册数:\t%d\n", current->data.all_num);
-			printf("剩余册数:\t%d\n", current->data.num);
-
-			// 打印每本书的借阅情况
-			printf("书本信息:\n");
-			printf("ID\t是否借出\n");
-			printf("-------\t--------\n");
 			Book* book = current->data.book;
 			while (book != NULL) {
-				printf("%d\t%s\n", book->id, book->isBorrowed ? "是" : "否");
+				printf("│ %6d │ %-18s │ %-10s │ %-11s │ %10d │ %6d │ %7d │ %7s │\n",
+					current->data.book_id,
+					current->data.name,
+					current->data.anthor,
+					current->data.press,
+					current->data.all_num,
+					current->data.num,
+					book->id,
+					book->isBorrowed ? "已借出" : "未借出");
 				book = book->next;
 			}
+			printf("└────────┴────────────────────┴────────────┴─────────────┴────────────┴────────┴─────────┴─────────┘\n");
 			return;
 		}
 		current = current->next;
 	}
+	system("cls");
 	printf("未找到book_id为%d的Books.\n", book_id);
+}
+
+// 根据书名查询Books信息
+void queryBooksByName(Chain* head, const char* book_name) {
+	Chain* current = head->next;
+	int found = 0;
+
+	printf("├────────┬────────────────────┬────────────┬─────────────┬────────────┬────────┬─────────┬─────────┤\n");
+	printf("│  ID    │ 图书名称           │ 作者       │ 出版社      │ 总册数     │ 剩余数 │ 书本序号│ 借阅状态│\n");
+	printf("├────────┼────────────────────┼────────────┼─────────────┼────────────┼────────┼─────────┼─────────┤\n");
+
+	while (current != NULL) {
+		if (strcmp(current->data.name, book_name) == 0) {
+			found = 1;
+			Book* book = current->data.book;
+			while (book != NULL) {
+				printf("│ %6d │ %-18s │ %-10s │ %-11s │ %10d │ %6d │ %7d │ %7s │\n",
+					current->data.book_id,
+					current->data.name,
+					current->data.anthor,
+					current->data.press,
+					current->data.all_num,
+					current->data.num,
+					book->id,
+					book->isBorrowed ? "已借出" : "未借出");
+				book = book->next;
+			}
+		}
+		current = current->next;
+	}
+
+	printf("└────────┴────────────────────┴────────────┴─────────────┴────────────┴────────┴─────────┴─────────┘\n");
+	if (!found) {
+		system("cls");
+		SetColor(0x04, 0);
+		printf("未找到书名为：%s 的图书\n", book_name);
+	}
 }
 
 //查询Book信息

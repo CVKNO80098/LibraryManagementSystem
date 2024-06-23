@@ -20,7 +20,7 @@ int Manage(UserInfo user, Chain* head) {
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
 			printf("1、查看总图书情况");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200)
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200)
 			{
 				system("cls");
 				SetColor(0x0f, 0);
@@ -36,8 +36,8 @@ int Manage(UserInfo user, Chain* head) {
 			pos.Y = 4;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("2、查看册图书情况");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("2、id查看册图书情况");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				SetColor(0x0f, 0);
 				printf("┌─────────────────────────────────────┐\n");
@@ -57,15 +57,42 @@ int Manage(UserInfo user, Chain* head) {
 			break;
 		}
 		case 2: {
-			pos.X = 0;
-			pos.Y = 0;
 			AdminPageMain(user, hOut);
 			pos.X = 9;
 			pos.Y = 5;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("3、查找指定图书情况");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("3、书名查找册图书情况");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
+				system("cls");
+				SetColor(0x0f, 0);
+				printf("┌─────────────────────────────────────┐\n");
+				printf("│              查询                   │\n");
+				printf("├─────────────────────────────────────┤\n");
+				printf("│     书本名称：______________        │\n");
+				printf("└─────────────────────────────────────┘\n");
+				pos.X = 18;
+				pos.Y = 3;
+				SetConsoleCursorPosition(hOut, pos);
+				char name[20];
+				gets(name);
+				system("cls");
+				queryBooksByName(head, name);
+				printf("按回车键继续");
+				getchar(); 
+			}
+			break;
+		}
+		case 3: {
+			pos.X = 0;
+			pos.Y = 0;
+			AdminPageMain(user, hOut);
+			pos.X = 9;
+			pos.Y = 6;
+			SetConsoleCursorPosition(hOut, pos);
+			SetColor(0x0a, 0);
+			printf("4、id查找指定图书情况");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				SetColor(0x0f, 0);
 				printf("┌─────────────────────────────────────┐\n");
@@ -85,16 +112,16 @@ int Manage(UserInfo user, Chain* head) {
 			}
 			break;
 		}
-		case 3: {
+		case 4: {
 			pos.X = 0;
 			pos.Y = 0;
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 6;
+			pos.Y = 7;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("4、添加一种书籍");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("5、添加一种书籍");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				SetColor(0x0f, 0);
 				int user_choice = 0;
@@ -197,14 +224,51 @@ int Manage(UserInfo user, Chain* head) {
 			}
 			break;
 		}
-		case 4: {
+		case 5: {
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 7;
+			pos.Y = 8;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("5、入库书籍");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("6、删除一种书籍");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
+				system("cls");
+				SetColor(0x0f, 0);
+				printf("┌─────────────────────────────────────┐\n");
+				printf("│              删除指定书籍           │\n");
+				printf("├─────────────────────────────────────┤\n");
+				printf("│       书籍id：______________        │\n");
+				printf("└─────────────────────────────────────┘\n");
+				pos.X = 16;
+				pos.Y = 3;
+				SetConsoleCursorPosition(hOut, pos);
+				int book_id;
+				scanf("%d", &book_id);
+				system("cls");
+				if (!DelBook(head, book_id))
+				{
+					system("cls");
+					SetColor(0x0a, 0);
+					printf("书籍已成功删除");
+					Sleep(500);
+				} else {
+					system("cls");
+					SetColor(0x04, 0);
+					printf("书籍删除失败！");
+					Sleep(500);
+				}
+				getchar(); getchar();
+			}
+			break;
+		}
+		case 6: {
+			AdminPageMain(user, hOut);
+			pos.X = 9;
+			pos.Y = 9;
+			SetConsoleCursorPosition(hOut, pos);
+			SetColor(0x0a, 0);
+			printf("7、入库书籍");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 
 				int user_choice = 0;
 				system("cls");
@@ -270,14 +334,14 @@ int Manage(UserInfo user, Chain* head) {
 			}
 			break;
 		}
-		case 5: {
+		case 7: {
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 8;
+			pos.Y = 10;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("6、注册新的账户");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("8、注册新的账户");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				int user_choice = 0;
 
@@ -346,28 +410,28 @@ int Manage(UserInfo user, Chain* head) {
 			}
 			break;
 		}
-		case 6: {
+		case 8: {
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 9;
+			pos.Y = 11;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("7、查看所有账户");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("9、查看所有账户");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				queryAllUsers();
 				getchar();
 				system("cls");
 			}
 			break;
 		}
-		case 7: {
+		case 9: {
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 10;
+			pos.Y = 12;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("8、删除指定账户");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("10、删除指定账户");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				SetColor(0x0f, 0);
 				printf("┌─────────────────────────────────────┐\n");
@@ -391,14 +455,14 @@ int Manage(UserInfo user, Chain* head) {
 			}
 			break;
 		}
-		case 8: {
+		case 10: {
 			AdminPageMain(user, hOut);
 			pos.X = 9;
-			pos.Y = 11;
+			pos.Y = 13;
 			SetConsoleCursorPosition(hOut, pos);
 			SetColor(0x0a, 0);
-			printf("9、退出");
-			if ((user_choice = KeyboardChoice(user_choice, 8)) == 200) {
+			printf("11、退出");
+			if ((user_choice = KeyboardChoice(user_choice, 9)) == 200) {
 				system("cls");
 				SetColor(0x0a, 0);
 				printf("欢迎下次光临~");
@@ -413,8 +477,5 @@ int Manage(UserInfo user, Chain* head) {
 			break;
 		}
 	}
-
-	
-
 	return 0;
 }

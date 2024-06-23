@@ -75,6 +75,8 @@ int addBook(Chain* head, int book_id, int book_num);
 int DelBook(Chain* head, int book_id);
 //显示Books信息
 void displayBooksInfo(Chain* head, int book_id);
+// 根据书名查询Books信息
+void queryBooksByName(Chain* head, const char* book_name);
 //查询Book信息
 void displayBookInfoById(Chain* head, int book_id);
 //显示全部Books信息
